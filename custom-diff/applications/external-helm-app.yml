@@ -7,23 +7,17 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
+
   source:
-    repoURL: https://github.com/berthelrob/gitops-cert-level-2-examples.git
+    repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
     targetRevision: HEAD
     path: ./custom-diff/02-external-app
+   
   destination:
     server: https://kubernetes.default.svc
     namespace: example02
+
+  # Sync policy
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true 
-    # Add the ignoreDifferences property for a specific resource
-    - resources:
-        - kind: Deployment  # Replace with the actual resource kind
-          name: deployment-name  # Replace with the resource name
-      ignoreDifferences:
-        - jsonPointers:
-            - /spec/template/spec/containers/0/image
-        - jsonPointers:
-            - /metadata/annotations
-# Add more resources with ignoreDifferences if needed
+      - CreateNamespace=true  
