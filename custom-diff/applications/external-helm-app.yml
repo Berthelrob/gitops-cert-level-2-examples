@@ -1,10 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-example02
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  ignoreDifferences:
+    name: helm-example02
+    namespace: argocd
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
