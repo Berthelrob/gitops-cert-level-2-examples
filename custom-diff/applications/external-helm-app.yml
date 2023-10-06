@@ -22,11 +22,3 @@ spec:
     syncOptions:
       - CreateNamespace=true  
 
-    - resources:
-        - kind: Deployment
-          name: helm-example02
-      ignoreDifferences:
-        - jsonPointers:
-            - /spec/template/spec/containers/0/image
-        - jsonPointers:
-            - /metadata/annotations
