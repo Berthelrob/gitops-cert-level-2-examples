@@ -1,11 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  ignoreDifferences:
-    name: helm-example02
-    namespace: argocd
-    finalizers:
-      - resources-finalizer.argocd.argoproj.io
+  name: helm-example02
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
@@ -22,3 +21,12 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true  
+
+    - resources:
+        - kind: Deployment
+          name: helm-example02
+      ignoreDifferences:
+        - jsonPointers:
+            - /spec/template/spec/containers/0/image
+        - jsonPointers:
+            - /metadata/annotations
